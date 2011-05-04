@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using MetaProfiler.Areas.Manage.Models.Entities;
+using MetaProfiler.Code.PropertyTypes;
+using MetaProfiler.Areas.Manage.Models;
 
 namespace MetaProfiler.Code
 {
@@ -12,7 +14,24 @@ namespace MetaProfiler.Code
     {
         public static void RenderEditorFor(this HtmlHelper htmlHelper, ProfileProperty property)
         {
-            htmlHelper.RenderPartial(property.PropertyType, property);
+            RenderEditorFor(htmlHelper, property, null);
+        }
+
+        public static void RenderEditorFor(this HtmlHelper htmlHelper, ProfileProperty property, string value)
+        {
+            htmlHelper.RenderPartial(property.PropertyType, new PropertyValue
+            {
+                Property = property,
+                Value = value
+            });
+        }
+
+        public static void RenderDesignerFor(this HtmlHelper htmlHelper, ProfileProperty property)
+        {
+            IPropertyType propertyType = new PropertyTypeResolver().ResolveAll()
+   .Single(x => x.Name == property.PropertyType);
+
+            htmlHelper.RenderPartial(propertyType.Settings.Name, property.Details);
         }
     }
 }

@@ -65,13 +65,15 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\Manage\Controllers\ProfileController.cs" />
     <Compile Include="Areas\Manage\Controllers\ProfilePropertyController.cs" />
-    <Compile Include="Areas\Manage\Controllers\PropertyCollectionController.cs" />
     <Compile Include="Areas\Manage\ManageAreaRegistration.cs" />
     <Compile Include="Areas\Manage\Models\AddProperty.cs" />
-    <Compile Include="Areas\Manage\Models\AddPropertyCollection.cs" />
+    <Compile Include="Areas\Manage\Models\EditProfile.cs" />
+    <Compile Include="Areas\Manage\Models\Entities\Characterization.cs" />
+    <Compile Include="Areas\Manage\Models\Entities\Profile.cs" />
     <Compile Include="Areas\Manage\Models\Entities\ProfileProperty.cs" />
-    <Compile Include="Areas\Manage\Models\Entities\PropertyCollection.cs" />
+    <Compile Include="Areas\Manage\Models\PropertyValue.cs" />
     <Compile Include="Code\Data\MongoDbActionFilter.cs" />
     <Compile Include="Code\Data\MongoDbController.cs" />
     <Compile Include="Code\DocumentModelBinder.cs" />
@@ -88,7 +90,6 @@
     <Compile Include="Code\PropertyTypes\ListSettings.cs" />
     <Compile Include="Code\PropertyTypes\Number.cs" />
     <Compile Include="Code\PropertyTypes\NumberSettings.cs" />
-    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -141,20 +142,23 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Manage\Shared\Manage.Master" />
-    <Content Include="Areas\Manage\Views\ProfileProperty\Add.aspx" />
-    <Content Include="Areas\Manage\Views\PropertyCollection\Add.ascx" />
-    <Content Include="Areas\Manage\Views\PropertyCollection\AddProperty.ascx" />
-    <Content Include="Areas\Manage\Views\PropertyCollection\Create.aspx" />
-    <Content Include="Areas\Manage\Views\PropertyCollection\Index.aspx" />
-    <Content Include="Views\Profile\Create.aspx" />
+    <Content Include="Areas\Manage\Views\ProfileProperty\Create.aspx" />
+    <Content Include="Areas\Manage\Views\ProfileProperty\Edit.aspx" />
+    <Content Include="Areas\Manage\Views\Profile\Create.aspx" />
     <Content Include="Areas\Manage\Views\ProfileProperty\ListSettings.ascx" />
-    <Content Include="Views\Shared\Getal.ascx" />
-    <Content Include="Views\Shared\JaNee.ascx" />
-    <Content Include="Views\Shared\Lijst.ascx" />
+    <Content Include="Areas\Manage\Views\Profile\Edit.aspx" />
+    <Content Include="Areas\Manage\Views\Profile\EditProfileForm.ascx" />
+    <Content Include="Areas\Manage\Views\Profile\Getal.ascx" />
+    <Content Include="Areas\Manage\Views\Profile\Index.aspx" />
+    <Content Include="Areas\Manage\Views\Profile\JaNee.ascx" />
+    <Content Include="Areas\Manage\Views\Profile\Lijst.ascx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Manage\Views\Shared\EditorTemplates\" />
+    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Profile\" />
+    <Folder Include="Views\Shared\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />

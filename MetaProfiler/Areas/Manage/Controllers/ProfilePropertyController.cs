@@ -29,7 +29,7 @@ namespace MetaProfiler.Areas.Manage.Controllers
             return View(properties);
         }
 
-        public ActionResult Add()
+        public ActionResult Create()
         {
             var model = new AddProperty()
             {
@@ -49,14 +49,35 @@ namespace MetaProfiler.Areas.Manage.Controllers
         public ActionResult Delete(string description)
         {
             var collection = Database.GetCollection<ProfileProperty>();
-            collection.Remove(new Document("Description", description));
+            collection.Remove(new { Description = description });
             
+            return RedirectToAction("Index");
+        }
+
+        [MongoDbActionFilter]
+        public ActionResult Edit(string description)
+        {
+            var collection = Database.GetCollection<ProfileProperty>();
+
+            ProfileProperty property = collection.FindOne(new { Description = description });
+
+            return View(property);
+        }
+
+        [HttpPost]
+        [MongoDbActionFilter]
+        public ActionResult Edit(ProfileProperty profileProperty)
+        {
+            var collection = Database.GetCollection<ProfileProperty>();
+
+            collection.Update(profileProperty, new { Description = profileProperty.Description });
+
             return RedirectToAction("Index");
         }
 
         [HttpPost]
         [MongoDbActionFilter]
-        public ActionResult Add(AddProperty property)
+        public ActionResult Create(AddProperty property)
         {
             IMongoCollection<ProfileProperty> mongoCollection = Database.GetCollection<ProfileProperty>();
 
@@ -68,7 +89,7 @@ namespace MetaProfiler.Areas.Manage.Controllers
         public ActionResult RenderDetails(string name)
         {
             IPropertyType propertyType = new PropertyTypeResolver().ResolveAll()
-            .Single(x => x.Name == name);
+            .Single(x => x.Name == name);   
 
             return PartialView(propertyType.Settings.Name);
         }

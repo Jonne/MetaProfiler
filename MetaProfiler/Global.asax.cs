@@ -38,7 +38,7 @@ namespace MetaProfiler
             AreaRegistration.RegisterAllAreas();
 
             ModelBinders.Binders.Add(typeof(ProfileProperty), new ProfilePropertyModelBinder());
-            ModelBinders.Binders.Add(typeof(Document), new DocumentModelBinder());
+            ModelBinders.Binders.Add(typeof(Profile), new ProfileModelBinder());
 
             RegisterRoutes(RouteTable.Routes);
         }

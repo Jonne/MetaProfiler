@@ -10,6 +10,7 @@
             <tr>
                 <th>Naam</th>
                 <th>Type</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -17,11 +18,14 @@
         <tr>
             <td><%= profileProperty.Description %></td>
             <td><%= profileProperty.PropertyType %></td>
-            <td><%= Html.ActionLink("Verwijderen", "Delete", new { Description = profileProperty.Description })%> </td>
+            <td>
+                <%= Html.ActionLink("Bewerken", "Edit", new { Description = profileProperty.Description })%> |
+                <%= Html.ActionLink("Verwijderen", "Delete", new { Description = profileProperty.Description })%> 
+            </td>
         </tr>        
     <%} %>
         </tbody>
     </table>
-    <%= Html.ActionLink("Toevoegen", "Add") %>
+    <%= Html.ActionLink("Toevoegen", "Create") %>
 </div>
 </asp:Content>
