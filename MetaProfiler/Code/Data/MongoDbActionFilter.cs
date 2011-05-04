@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using MongoDB.Configuration;
 using MongoDB;
 using MetaProfiler.Code.PropertyTypes;
+using MongoDB.Driver;
+using MongoDB.Bson.Serialization;
 
 namespace MetaProfiler.Code.Data
 {
@@ -18,22 +19,8 @@ namespace MetaProfiler.Code.Data
             if (mongoController == null)
                 return;
 
-            // Todo: configuratie hoort hier niet
-            var config = new MongoConfigurationBuilder();
-            config.ConnectionString(x => x.Database = "test");
+            var mongo = MongoServer.Create();
 
-            config.Mapping(mapping =>
-            {
-                mapping.DefaultProfile(profile =>
-                {
-                    profile.SubClassesAre(y => y.IsSubclassOf(typeof(PropertyTypeDetails)));
-                });
-                mapping.Map<NumberSettings>();
-                mapping.Map<ListSettings>();
-                mapping.Map<DateSettings>();
-            });
-
-            var mongo = new Mongo(config.BuildConfiguration());
             mongo.Connect();
 
             var database = mongo.GetDatabase("MetaProfiler");

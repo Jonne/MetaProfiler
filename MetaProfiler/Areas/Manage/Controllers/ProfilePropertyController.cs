@@ -9,8 +9,11 @@ using MetaProfiler.Areas.Manage.Models.Entities;
 using MetaProfiler.Code;
 using MetaProfiler.Code.PropertyTypes;
 using System.IO;
-using MongoDB.Configuration;
+
 using MetaProfiler.Code.Data;
+using MongoDB.Driver.Builders;
+using MongoDB.Driver;
+using MongoDB.Bson;
 
 namespace MetaProfiler.Areas.Manage.Controllers
 {
@@ -21,9 +24,8 @@ namespace MetaProfiler.Areas.Manage.Controllers
         [MongoDbActionFilter()]
         public ActionResult Index()
         {
-            IEnumerable<ProfileProperty> properties = Database.GetCollection<ProfileProperty>()
+            IEnumerable<ProfileProperty> properties = Database.GetCollection<ProfileProperty>("ProfileProperty")
                     .FindAll()
-                    .Documents
                     .ToList();
             
             return View(properties);
@@ -46,20 +48,20 @@ namespace MetaProfiler.Areas.Manage.Controllers
         }
 
         [MongoDbActionFilter]
-        public ActionResult Delete(string description)
+        public ActionResult Delete(ObjectId id)
         {
-            var collection = Database.GetCollection<ProfileProperty>();
-            collection.Remove(new { Description = description });
+            var collection = Database.GetCollection<ProfileProperty>("ProfileProperty");
+            collection.Remove(Query.EQ("_id", id));
             
             return RedirectToAction("Index");
         }
 
         [MongoDbActionFilter]
-        public ActionResult Edit(string description)
+        public ActionResult Edit(ObjectId id)
         {
-            var collection = Database.GetCollection<ProfileProperty>();
+            var collection = Database.GetCollection<ProfileProperty>("ProfileProperty");
 
-            ProfileProperty property = collection.FindOne(new { Description = description });
+            ProfileProperty property = collection.FindOneById(id);
 
             return View(property);
         }
@@ -68,9 +70,9 @@ namespace MetaProfiler.Areas.Manage.Controllers
         [MongoDbActionFilter]
         public ActionResult Edit(ProfileProperty profileProperty)
         {
-            var collection = Database.GetCollection<ProfileProperty>();
+            var collection = Database.GetCollection<ProfileProperty>("ProfileProperty");
 
-            collection.Update(profileProperty, new { Description = profileProperty.Description });
+            collection.Save(profileProperty);
 
             return RedirectToAction("Index");
         }
@@ -79,7 +81,7 @@ namespace MetaProfiler.Areas.Manage.Controllers
         [MongoDbActionFilter]
         public ActionResult Create(AddProperty property)
         {
-            IMongoCollection<ProfileProperty> mongoCollection = Database.GetCollection<ProfileProperty>();
+            MongoCollection<ProfileProperty> mongoCollection = Database.GetCollection<ProfileProperty>("ProfileProperty");
 
             mongoCollection.Insert(property.NewProperty);
 

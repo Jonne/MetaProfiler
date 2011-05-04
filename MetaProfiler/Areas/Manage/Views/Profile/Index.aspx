@@ -1,12 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/Manage/Shared/Manage.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<MetaProfiler.Areas.Manage.Models.Entities.Profile>>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	Index
+	Testprofielen
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-    <h2>Index</h2>
+    <h2>Testprofielen</h2>
 
     <table>
         <tr>
@@ -21,8 +21,8 @@
                 <%= Html.Encode(item.Name) %>
             </td>
             <td>
-                <%= Html.ActionLink("Bewerken", "Edit", new { name=item.Name }) %> |
-                <%= Html.ActionLink("Verwijderen", "Delete", new { name = item.Name })%>
+                <%= Html.ActionLink("Bewerken", "Edit", new { id=item.Id}) %> |
+                <%= Html.ActionLink("Verwijderen", "Delete", new { id = item.Id})%>
             </td>            
         </tr>
     

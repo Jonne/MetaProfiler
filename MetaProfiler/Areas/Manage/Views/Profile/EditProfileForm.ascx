@@ -2,13 +2,22 @@
 <%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<MetaProfiler.Areas.Manage.Models.EditProfile>" %>
 <% using (Html.BeginForm())
    {%>
+   
 <fieldset>
     <legend>Algemeen</legend>
     <div class="editor-label">
         <%= Html.Label("Name") %>
     </div>
     <div class="editor-field">
-        <%= Html.TextBox("Name") %>
+        <% if (Model.Profile != null)
+           { %>
+           <%= Html.Hidden("Id", Model.Profile.Id) %>
+            <%= Html.TextBox("Name", Model.Profile.Name)%>
+        <%}
+           else
+           {%>
+           <%= Html.TextBox("Name") %>
+        <%} %>
     </div>
 </fieldset>
 <fieldset>

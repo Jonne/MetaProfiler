@@ -19,8 +19,8 @@
             <td><%= profileProperty.Description %></td>
             <td><%= profileProperty.PropertyType %></td>
             <td>
-                <%= Html.ActionLink("Bewerken", "Edit", new { Description = profileProperty.Description })%> |
-                <%= Html.ActionLink("Verwijderen", "Delete", new { Description = profileProperty.Description })%> 
+                <%= Html.ActionLink("Bewerken", "Edit", new { Id = profileProperty.Id })%> |
+                <%= Html.ActionLink("Verwijderen", "Delete", new { Id = profileProperty.Id })%> 
             </td>
         </tr>        
     <%} %>

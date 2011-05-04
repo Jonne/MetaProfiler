@@ -8,6 +8,10 @@ using MetaProfiler.Areas.Manage.Models;
 using MetaProfiler.Code;
 using MetaProfiler.Areas.Manage.Models.Entities;
 using MongoDB;
+using Microsoft.Web.Mvc;
+using MongoDB.Bson.Serialization;
+using MetaProfiler.Code.PropertyTypes;
+using MongoDB.Bson;
 
 namespace MetaProfiler
 {
@@ -35,10 +39,17 @@ namespace MetaProfiler
 
         protected void Application_Start()
         {
+            BsonClassMap.RegisterClassMap<NumberSettings>();
+            BsonClassMap.RegisterClassMap<ListSettings>();
+            BsonClassMap.RegisterClassMap<DateSettings>();
+
             AreaRegistration.RegisterAllAreas();
 
             ModelBinders.Binders.Add(typeof(ProfileProperty), new ProfilePropertyModelBinder());
             ModelBinders.Binders.Add(typeof(Profile), new ProfileModelBinder());
+            ModelBinders.Binders.Add(typeof(ObjectId), new ObjectIdModelBinder());
+
+            ValueProviderFactories.Factories.Add(new JsonValueProviderFactory());
 
             RegisterRoutes(RouteTable.Routes);
         }

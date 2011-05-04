@@ -13,8 +13,9 @@
 <body>
     <div id="navigation">
         <ul>
-            <li><a href="/Manage/ProfileProperty">Profiel eigenschappen</a></li>
-            <li><a href="/Manage/Profile">Test profielen</a></li>
+            <li><a href="/Manage/ProfileProperty">Profieleigenschappen</a></li>
+            <li><a href="/Manage/Profile">Testprofielen</a></li>
+            <li><a href="/Manage/Characterization">Profielschetsen</a></li>
         </ul>
     </div>
 

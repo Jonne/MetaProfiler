@@ -31,9 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MongoDB, Version=0.90.0.1, Culture=neutral, PublicKeyToken=f61bd00ba2535278, processorArchitecture=MSIL">
+    <Reference Include="MongoDB.Bson, Version=1.0.0.4098, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\MongoDB\MongoDB.dll</HintPath>
+      <HintPath>..\Lib\MongoDB\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver, Version=1.0.0.4098, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\MongoDB\MongoDB.Driver.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -65,18 +69,23 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\Manage\Controllers\CharacterizationController.cs" />
     <Compile Include="Areas\Manage\Controllers\ProfileController.cs" />
     <Compile Include="Areas\Manage\Controllers\ProfilePropertyController.cs" />
     <Compile Include="Areas\Manage\ManageAreaRegistration.cs" />
     <Compile Include="Areas\Manage\Models\AddProperty.cs" />
+    <Compile Include="Areas\Manage\Models\EditCharacterization.cs" />
     <Compile Include="Areas\Manage\Models\EditProfile.cs" />
     <Compile Include="Areas\Manage\Models\Entities\Characterization.cs" />
+    <Compile Include="Areas\Manage\Models\Entities\Clause.cs" />
     <Compile Include="Areas\Manage\Models\Entities\Profile.cs" />
     <Compile Include="Areas\Manage\Models\Entities\ProfileProperty.cs" />
     <Compile Include="Areas\Manage\Models\PropertyValue.cs" />
     <Compile Include="Code\Data\MongoDbActionFilter.cs" />
     <Compile Include="Code\Data\MongoDbController.cs" />
-    <Compile Include="Code\DocumentModelBinder.cs" />
+    <Compile Include="Code\ProfileModelBinder.cs" />
+    <Compile Include="Code\JsonValueProviderFactory.cs" />
+    <Compile Include="Code\ObjectIdModelBinder.cs" />
     <Compile Include="Code\ProfilePropertyHtmlExtensions.cs" />
     <Compile Include="Code\PropertyTypeModelBinder.cs" />
     <Compile Include="Code\PropertyTypeResolver.cs" />
@@ -142,6 +151,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Manage\Shared\Manage.Master" />
+    <Content Include="Areas\Manage\Views\Characterization\Create.aspx" />
+    <Content Include="Areas\Manage\Views\Characterization\Index.aspx" />
+    <Content Include="Areas\Manage\Views\Characterization\SearchResults.ascx" />
     <Content Include="Areas\Manage\Views\ProfileProperty\Create.aspx" />
     <Content Include="Areas\Manage\Views\ProfileProperty\Edit.aspx" />
     <Content Include="Areas\Manage\Views\Profile\Create.aspx" />
@@ -152,6 +164,7 @@
     <Content Include="Areas\Manage\Views\Profile\Index.aspx" />
     <Content Include="Areas\Manage\Views\Profile\JaNee.ascx" />
     <Content Include="Areas\Manage\Views\Profile\Lijst.ascx" />
+    <Content Include="Scripts\json2.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Manage\Views\Shared\EditorTemplates\" />

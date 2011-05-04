@@ -7,6 +7,9 @@ using MetaProfiler.Code.Data;
 using MetaProfiler.Areas.Manage.Models.Entities;
 using MongoDB;
 using MetaProfiler.Areas.Manage.Models;
+using MongoDB.Driver;
+using MongoDB.Driver.Builders;
+using MongoDB.Bson;
 
 namespace MetaProfiler.Areas.Manage.Controllers
 {
@@ -17,9 +20,8 @@ namespace MetaProfiler.Areas.Manage.Controllers
         [MongoDbActionFilter]
         public ActionResult Index()
         {
-            IEnumerable<Profile> profiles = Database.GetCollection<Profile>()
+            IEnumerable<Profile> profiles = Database.GetCollection<Profile>("Profile")
                 .FindAll()
-                .Documents
                 .ToList();
 
             return View(profiles);
@@ -30,9 +32,8 @@ namespace MetaProfiler.Areas.Manage.Controllers
         [MongoDbActionFilter]
         public ActionResult Create()
         {
-            IEnumerable<ProfileProperty> properties = Database.GetCollection<ProfileProperty>()
+            IEnumerable<ProfileProperty> properties = Database.GetCollection<ProfileProperty>("ProfileProperty")
                 .FindAll()
-                .Documents
                 .ToList();
 
             return View(new EditProfile
@@ -45,7 +46,7 @@ namespace MetaProfiler.Areas.Manage.Controllers
         [MongoDbActionFilter]
         public ActionResult Create(Profile profile)
         {
-            IMongoCollection<Profile> collection = Database.GetCollection<Profile>();
+            MongoCollection<Profile> collection = Database.GetCollection<Profile>("Profile");
 
             collection.Insert(profile);
 
@@ -53,15 +54,14 @@ namespace MetaProfiler.Areas.Manage.Controllers
         }
 
         [MongoDbActionFilter]
-        public ActionResult Edit(string name)
+        public ActionResult Edit(ObjectId id)
         {
-            IEnumerable<ProfileProperty> properties = Database.GetCollection<ProfileProperty>()
+            IEnumerable<ProfileProperty> properties = Database.GetCollection<ProfileProperty>("ProfileProperty")
                 .FindAll()
-                .Documents
                 .ToList();
 
-            Profile profile = Database.GetCollection<Profile>()
-                .FindOne(new { Name = name });
+            Profile profile = Database.GetCollection<Profile>("Profile")
+                .FindOneById(id);
 
             return View(new EditProfile
             {
@@ -71,11 +71,10 @@ namespace MetaProfiler.Areas.Manage.Controllers
         }
 
         [MongoDbActionFilter]
-        public ActionResult Delete(string name)
+        public ActionResult Delete(ObjectId id)
         {
-            IMongoCollection<Profile> collection = Database.GetCollection<Profile>();
-
-            collection.Remove(new { Name = name });
+            MongoCollection<Profile> collection = Database.GetCollection<Profile>("Profile");
+            collection.Remove(Query.EQ("_id", id));
 
             return RedirectToAction("Index");
         }
@@ -84,9 +83,9 @@ namespace MetaProfiler.Areas.Manage.Controllers
         [MongoDbActionFilter]
         public ActionResult Edit(Profile profile)
         {
-            IMongoCollection<Profile> collection = Database.GetCollection<Profile>();
+            MongoCollection<Profile> collection = Database.GetCollection<Profile>("Profile");
 
-            collection.Update(profile, new { Name = profile.Name });
+            collection.Save(profile);
 
             return RedirectToAction("Index");
         }
