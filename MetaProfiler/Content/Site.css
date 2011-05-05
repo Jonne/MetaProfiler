@@ -29,6 +29,7 @@
 
 body
 {
+	background-color: #F9F9F9;
 	height: 100%;
 	margin: 0;
 	padding: 0;
@@ -51,4 +52,53 @@ body
 	height: 100%;
 	width: auto;
 	margin-left: 210px;
+}
+
+input[type="file"], input[type="button"], input[type="submit"], input[type="reset"], select {
+    background-color: #FFFFFF;
+    border-color: #DFDFDF;
+}
+
+textarea, input[type="text"], input[type="password"], input[type="file"], input[type="button"], input[type="submit"], input[type="reset"], select {
+    border-radius: 4px 4px 4px 4px;
+    border-style: solid;
+    border-width: 1px;
+}
+
+input[type="text"], input[type="password"], textarea {
+    -moz-box-sizing: border-box;
+}
+
+.button, .button-secondary, .submit input, input[type="button"], input[type="submit"] {
+    border-color: #BBBBBB;
+    color: #464646;
+}
+
+textarea, input[type="text"], input[type="password"], input[type="file"], input[type="button"], input[type="submit"], input[type="reset"], select {
+    background-color: #FFFFFF;
+    border-color: #DFDFDF;
+}
+
+.submit input, .button, input.button, .button-primary, input.button-primary, .button-secondary, input.button-secondary, .button-highlighted, input.button-highlighted, #postcustomstuff .submit input {
+    -moz-box-sizing: content-box;
+    border-radius: 11px 11px 11px 11px;
+    border-style: solid;
+    border-width: 1px;
+    cursor: pointer;
+    font-size: 11px !important;
+    line-height: 13px;
+    padding: 3px 8px;
+    text-decoration: none;
+}
+
+table {
+    border-spacing: 0;
+    border-style: solid;
+    border-width: 1px;
+    clear: both;
+    margin: 0;
+}
+
+thead{
+	background-color: #CCCCCC
 }

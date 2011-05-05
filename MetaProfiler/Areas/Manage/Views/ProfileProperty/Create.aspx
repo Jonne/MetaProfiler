@@ -14,6 +14,7 @@
         });
 
         function loadDetailsEditor() {
+            $('#propertyDetails').html('<img src=\'/Content/Images/ajax-loader.gif\'/>');
             $('#propertyDetails').load('/Manage/ProfileProperty/RenderDetails?name=' + $('.propertyTypeSelector').val());
         }
     </script>

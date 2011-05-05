@@ -11,7 +11,7 @@
     <div class="editor-field">
         <% if (Model.Profile != null)
            { %>
-           <%= Html.Hidden("Id", Model.Profile.Id) %>
+            <%= Html.HiddenFor(model => model.Profile.Id) %>
             <%= Html.TextBox("Name", Model.Profile.Name)%>
         <%}
            else
